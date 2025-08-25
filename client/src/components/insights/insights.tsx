@@ -9,11 +9,13 @@ type InsightsProps = {
   onInsightDeleted?: () => void;
 };
 
-export const Insights = ({ insights, className, onInsightDeleted }: InsightsProps) => {
+export const Insights = (
+  { insights, className, onInsightDeleted }: InsightsProps,
+) => {
   const deleteInsight = async (id: number) => {
     try {
       const response = await fetch(`/api/insights/delete/${id}`);
-      
+
       if (response.ok) {
         console.log(`Insight ${id} deleted successfully`);
         onInsightDeleted?.();
@@ -40,7 +42,8 @@ export const Insights = ({ insights, className, onInsightDeleted }: InsightsProp
                     <span>{createdAt.toLocaleDateString()}</span>
                     <Trash2Icon
                       className={styles["insight-delete"]}
-                      onClick={() => deleteInsight(id)}
+                      onClick={() =>
+                        deleteInsight(id)}
                     />
                   </div>
                 </div>

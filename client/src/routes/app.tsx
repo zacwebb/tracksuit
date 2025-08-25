@@ -5,7 +5,7 @@ import styles from "./app.module.css";
 import type { Insight } from "../schemas/insight.ts";
 
 // createdAt comes from the API as a string, and we convert to a JS Date in fetchInsights()
-type InsightApiResponse = Omit<Insight, 'createdAt'> & {
+type InsightApiResponse = Omit<Insight, "createdAt"> & {
   createdAt: string;
 };
 

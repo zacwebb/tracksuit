@@ -1,5 +1,11 @@
-import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
-import { render, fireEvent, waitFor, screen, cleanup } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { AddInsight } from "./add-insight.tsx";
 
 // Mock fetch
@@ -20,11 +26,11 @@ describe("AddInsight", () => {
 
   it("renders form elements correctly", () => {
     render(
-      <AddInsight 
+      <AddInsight
         open
-        onClose={mockOnClose} 
-        onInsightAdded={mockOnInsightAdded} 
-      />
+        onClose={mockOnClose}
+        onInsightAdded={mockOnInsightAdded}
+      />,
     );
 
     expect(screen.getByText("Add a new insight")).toBeTruthy();
@@ -35,11 +41,11 @@ describe("AddInsight", () => {
 
   it("shows error when submitting empty insight", async () => {
     render(
-      <AddInsight 
+      <AddInsight
         open
-        onClose={mockOnClose} 
-        onInsightAdded={mockOnInsightAdded} 
-      />
+        onClose={mockOnClose}
+        onInsightAdded={mockOnInsightAdded}
+      />,
     );
 
     const submitButton = screen.getByRole("button", { name: "Add insight" });
@@ -57,11 +63,11 @@ describe("AddInsight", () => {
     });
 
     render(
-      <AddInsight 
-        open 
-        onClose={mockOnClose} 
-        onInsightAdded={mockOnInsightAdded} 
-      />
+      <AddInsight
+        open
+        onClose={mockOnClose}
+        onInsightAdded={mockOnInsightAdded}
+      />,
     );
 
     const textArea = screen.getByLabelText("Insight");
@@ -94,11 +100,11 @@ describe("AddInsight", () => {
     });
 
     render(
-      <AddInsight 
+      <AddInsight
         open
-        onClose={mockOnClose} 
-        onInsightAdded={mockOnInsightAdded} 
-      />
+        onClose={mockOnClose}
+        onInsightAdded={mockOnInsightAdded}
+      />,
     );
 
     const textArea = screen.getByLabelText("Insight");
@@ -121,7 +127,7 @@ describe("AddInsight", () => {
         open
         onClose={mockOnClose}
         onInsightAdded={mockOnInsightAdded}
-      />
+      />,
     );
 
     const brandSelect = getByLabelText("Brand");
@@ -133,10 +139,13 @@ describe("AddInsight", () => {
   it("shows loading state during submission", () => {
     // Mock a delayed response
     mockFetch.mockImplementationOnce(() =>
-      new Promise(resolve => setTimeout(() => resolve({
-        ok: true,
-        json: () => ({ success: true }),
-      }), 100))
+      new Promise((resolve) =>
+        setTimeout(() =>
+          resolve({
+            ok: true,
+            json: () => ({ success: true }),
+          }), 100)
+      )
     );
 
     const { getByLabelText, getByRole } = render(
@@ -144,7 +153,7 @@ describe("AddInsight", () => {
         open
         onClose={mockOnClose}
         onInsightAdded={mockOnInsightAdded}
-      />
+      />,
     );
 
     const textArea = getByLabelText("Insight");

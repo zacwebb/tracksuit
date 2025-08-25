@@ -1,6 +1,6 @@
-import { describe, expect, it, vi, afterEach } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { Header, HEADER_TEXT } from "./header.tsx";
-import { render, fireEvent, cleanup } from "@testing-library/react";
+import { cleanup, fireEvent, render } from "@testing-library/react";
 
 describe("header", () => {
   afterEach(() => {
@@ -14,10 +14,10 @@ describe("header", () => {
 
   it("opens add insight modal when button is clicked", () => {
     const { getByText } = render(<Header />);
-    
+
     const addButton = getByText("Add insight");
     fireEvent.click(addButton);
-    
+
     // Check if the modal content is visible
     expect(getByText("Add a new insight")).toBeTruthy();
   });
@@ -25,7 +25,7 @@ describe("header", () => {
   it("calls onInsightAdded callback when provided", () => {
     const mockCallback = vi.fn();
     const { getByText } = render(<Header onInsightAdded={mockCallback} />);
-    
+
     expect(getByText(HEADER_TEXT)).toBeTruthy();
   });
 });

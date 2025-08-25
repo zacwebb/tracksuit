@@ -13,7 +13,7 @@ const TEST_INSIGHTS = [
     id: 2,
     brand: 2,
     createdAt: new Date(),
-    text: "Another test insight"
+    text: "Another test insight",
   },
 ];
 

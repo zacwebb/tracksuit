@@ -7,12 +7,14 @@ for details on the activity.
 
 1. On the top right corner of this page, click the "Use this template" button
 2. Select "Create Your Own Repository" from the dropdown
-3. Give the repository a name under your Github account, and click "Create a new repository"
+3. Give the repository a name under your Github account, and click "Create a new
+   repository"
 4. Follow the below instructions to complete the exercise
 
 **Submit Your Work**
 
-Once you’ve completed the task, please add the `tracksuit-technical-test` Github user as a collaborator, and share the repo link with the talent manager.
+Once you’ve completed the task, please add the `tracksuit-technical-test` Github
+user as a collaborator, and share the repo link with the talent manager.
 
 <!-- Link definitions -->
 

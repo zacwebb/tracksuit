@@ -16,7 +16,7 @@ export const AddInsight = ({ onInsightAdded, ...props }: AddInsightProps) => {
 
   const addInsight = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!text.trim()) {
       setError("Please enter an insight");
       return;
@@ -45,14 +45,16 @@ export const AddInsight = ({ onInsightAdded, ...props }: AddInsightProps) => {
       // Reset form
       setBrand(BRANDS[0].id);
       setText("");
-      
+
       // Close modal
       props.onClose?.();
-      
+
       // Notify parent component
       onInsightAdded?.();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An unknown error occurred");
+      setError(
+        err instanceof Error ? err.message : "An unknown error occurred",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +89,10 @@ export const AddInsight = ({ onInsightAdded, ...props }: AddInsightProps) => {
           />
         </label>
         {error && (
-          <div className={styles.error} style={{ color: "red", marginBottom: "1rem" }}>
+          <div
+            className={styles.error}
+            style={{ color: "red", marginBottom: "1rem" }}
+          >
             {error}
           </div>
         )}
