@@ -6,6 +6,7 @@ import { Port } from "../lib/utils/index.ts";
 import listInsights from "./operations/list-insights.ts";
 import lookupInsight from "./operations/lookup-insight.ts";
 import createInsight from "./operations/create-insight.ts";
+import deleteInsight from "./operations/delete-insight.ts";
 import { createTable } from "./tables/insights.ts";
 
 console.log("Loading configuration");
@@ -64,8 +65,39 @@ router.post("/insights/create", async (ctx) => {
   }
 });
 
-router.get("/insights/delete", (ctx) => {
-  // TODO
+// TODO check Tracksuit convention on using DELETE instead (a lot of APIs just stick to GET for delete requests)
+router.get("/insights/delete/:id", (ctx) => {
+  try {
+    const params = ctx.params as Record<string, any>;
+    const id = parseInt(params.id, 10);
+
+    if (isNaN(id)) {
+      ctx.response.status = 400;
+      ctx.response.body = { error: "Invalid ID parameter" };
+      return;
+    }
+
+    const result = deleteInsight({ db, id });
+
+    if (result) {
+      ctx.response.body = {
+        success: true,
+        message: "Insight deleted successfully",
+      };
+      ctx.response.status = 200;
+    } else {
+      ctx.response.body = { error: "Insight not found" };
+      ctx.response.status = 404;
+    }
+  } catch (error) {
+    console.error("Error deleting insight:", error);
+    ctx.response.status = 400;
+    ctx.response.body = {
+      error: error instanceof Error
+        ? error.message
+        : "An unknown error occurred",
+    };
+  }
 });
 
 const app = new oak.Application();

@@ -33,7 +33,11 @@ export const App = () => {
   return (
     <main className={styles.main}>
       <Header onInsightAdded={fetchInsights} />
-      <Insights className={styles.insights} insights={insights} />
+      <Insights
+        className={styles.insights}
+        insights={insights}
+        onInsightDeleted={fetchInsights}
+      />
     </main>
   );
 };

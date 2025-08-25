@@ -6,10 +6,25 @@ import type { Insight } from "../../schemas/insight.ts";
 type InsightsProps = {
   insights: Insight[];
   className?: string;
+  onInsightDeleted?: () => void;
 };
 
-export const Insights = ({ insights, className }: InsightsProps) => {
-  const deleteInsight = () => undefined;
+export const Insights = ({ insights, className, onInsightDeleted }: InsightsProps) => {
+  const deleteInsight = async (id: number) => {
+    try {
+      const response = await fetch(`/api/insights/delete/${id}`);
+      
+      if (response.ok) {
+        console.log(`Insight ${id} deleted successfully`);
+        onInsightDeleted?.();
+      } else {
+        const errorData = await response.json();
+        console.error("Failed to delete insight:", errorData.error);
+      }
+    } catch (error) {
+      console.error("Error deleting insight:", error);
+    }
+  };
 
   return (
     <div className={cx(className)}>
@@ -25,7 +40,7 @@ export const Insights = ({ insights, className }: InsightsProps) => {
                     <span>{createdAt.toLocaleDateString()}</span>
                     <Trash2Icon
                       className={styles["insight-delete"]}
-                      onClick={deleteInsight}
+                      onClick={() => deleteInsight(id)}
                     />
                   </div>
                 </div>
