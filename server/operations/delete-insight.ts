@@ -16,8 +16,7 @@ export default (input: Input): boolean => {
   });
 
   // Check if the insight exists before attempting to delete
-  const [existingInsight] = input.db
-    .sql<
+  const [existingInsight] = input.db.sql<
     insightsTable.Row
   >`SELECT id FROM insights WHERE id = ${validatedInput.id} LIMIT 1`;
 

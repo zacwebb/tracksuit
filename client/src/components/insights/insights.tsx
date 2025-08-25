@@ -1,3 +1,4 @@
+import { memo, useCallback } from "react";
 import { Trash2Icon } from "lucide-react";
 import { cx } from "../../lib/cx.ts";
 // TODO Does Deno support CSS Modules? https://github.com/denoland/deno/issues/11961
@@ -11,10 +12,10 @@ type InsightsProps = {
   onInsightDeleted?: () => void;
 };
 
-export const Insights = (
+const InsightsComponent = (
   { insights, className, onInsightDeleted }: InsightsProps,
 ) => {
-  const deleteInsight = async (id: number) => {
+  const deleteInsight = useCallback(async (id: number) => {
     try {
       const response = await fetch(`/api/insights/delete/${id}`);
 
@@ -28,7 +29,7 @@ export const Insights = (
     } catch (error) {
       console.error("Error deleting insight:", error);
     }
-  };
+  }, [onInsightDeleted]);
 
   return (
     <div className={cx(className)}>
@@ -58,3 +59,5 @@ export const Insights = (
     </div>
   );
 };
+
+export const Insights = memo(InsightsComponent);

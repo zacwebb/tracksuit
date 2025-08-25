@@ -1,7 +1,6 @@
 import type { z } from "zod";
 import { Insight } from "$models/insight.ts";
 import type { HasDBClient } from "../shared.ts";
-import * as insightsTable from "$tables/insights.ts";
 
 // Input schema for creating an insight (excludes id and createdAt)
 const CreateInsightInput = Insight.omit({ id: true, createdAt: true });
@@ -20,19 +19,11 @@ export default (input: Input): Insight => {
 
   const createdAt = new Date().toISOString();
 
-  const insertData: insightsTable.Insert = {
-    brand: validatedInput.brand,
-    createdAt,
-    text: validatedInput.text,
-  };
-
-  // Insert the new insight
-  input.db.exec(insightsTable.insertStatement(insertData));
-
-  // Get the last inserted row ID
-  const [{ "last_insert_rowid()": id }] = input.db.sql<
-    { "last_insert_rowid()": number }
-  >`SELECT last_insert_rowid()`;
+  const [{ id }] = input.db.sql<{ id: number }>`
+    INSERT INTO insights (brand, createdAt, text)
+    VALUES (${validatedInput.brand}, ${createdAt}, ${validatedInput.text})
+    RETURNING id
+  `;
 
   const result: Insight = {
     id,

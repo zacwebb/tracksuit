@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react";
+import { memo } from "react";
 import { cx } from "../../lib/cx.ts";
 // TODO Does Deno support CSS Modules? https://github.com/denoland/deno/issues/11961
 // @ts-ignore css modules
@@ -11,7 +12,7 @@ type ButtonProps = {
   theme?: "primary" | "secondary";
 } & ComponentProps<"button">;
 
-export const Button = ({
+const ButtonComponent = ({
   label,
   theme = "primary",
   className,
@@ -23,3 +24,5 @@ export const Button = ({
     </button>
   );
 };
+
+export const Button = memo(ButtonComponent);

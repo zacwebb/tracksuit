@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { BRANDS } from "../../lib/consts.ts";
 import { Button } from "../button/button.tsx";
 import { Modal, type ModalProps } from "../modal/modal.tsx";
@@ -16,7 +16,7 @@ export const AddInsight = ({ onInsightAdded, ...props }: AddInsightProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const addInsight = async (e: React.FormEvent) => {
+  const addInsight = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!text.trim()) {
@@ -51,7 +51,6 @@ export const AddInsight = ({ onInsightAdded, ...props }: AddInsightProps) => {
       // Close modal
       props.onClose?.();
 
-      // Notify parent component
       onInsightAdded?.();
     } catch (err) {
       setError(
@@ -60,7 +59,7 @@ export const AddInsight = ({ onInsightAdded, ...props }: AddInsightProps) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [brand, text, props.onClose, onInsightAdded]);
 
   return (
     <Modal {...props}>
