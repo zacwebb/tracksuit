@@ -4,6 +4,8 @@ import type { ReactNode } from "react";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { cx } from "../../lib/cx.ts";
+// TODO Does Deno support CSS Modules? https://github.com/denoland/deno/issues/11961
+// @ts-ignore css modules
 import styles from "./modal.module.css";
 
 export type ModalProps = {

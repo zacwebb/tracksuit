@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Button } from "../button/button.tsx";
+// TODO Does Deno support CSS Modules? https://github.com/denoland/deno/issues/11961
+// @ts-ignore css modules
 import styles from "./header.module.css";
 import { AddInsight } from "../add-insight/add-insight.tsx";
 

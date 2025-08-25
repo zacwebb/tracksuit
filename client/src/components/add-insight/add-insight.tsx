@@ -2,6 +2,8 @@ import { useState } from "react";
 import { BRANDS } from "../../lib/consts.ts";
 import { Button } from "../button/button.tsx";
 import { Modal, type ModalProps } from "../modal/modal.tsx";
+// TODO Does Deno support CSS Modules?
+// @ts-ignore css modules
 import styles from "./add-insight.module.css";
 
 type AddInsightProps = ModalProps & {

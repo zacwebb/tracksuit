@@ -1,5 +1,7 @@
 import type { ComponentProps } from "react";
 import { cx } from "../../lib/cx.ts";
+// TODO Does Deno support CSS Modules? https://github.com/denoland/deno/issues/11961
+// @ts-ignore css modules
 import styles from "./button.module.css";
 
 type ButtonProps = {

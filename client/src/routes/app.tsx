@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Header } from "../components/header/header.tsx";
 import { Insights } from "../components/insights/insights.tsx";
+// TODO Does Deno support CSS Modules? https://github.com/denoland/deno/issues/11961
+// @ts-ignore css modules
 import styles from "./app.module.css";
 import type { Insight } from "../schemas/insight.ts";
 

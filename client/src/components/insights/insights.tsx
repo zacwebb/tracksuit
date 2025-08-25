@@ -1,5 +1,7 @@
 import { Trash2Icon } from "lucide-react";
 import { cx } from "../../lib/cx.ts";
+// TODO Does Deno support CSS Modules? https://github.com/denoland/deno/issues/11961
+// @ts-ignore css modules
 import styles from "./insights.module.css";
 import type { Insight } from "../../schemas/insight.ts";
 
